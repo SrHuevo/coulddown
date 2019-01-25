@@ -9,37 +9,48 @@
             font-size: 300px;
             line-height: 90vh;
             text-align: center;
+            font-family: monospace;
         }
     </style>
 
     <script>
 
-        function msToTime(duration) {
-          var milliseconds = parseInt((duration % 1000) / 100),
-            seconds = parseInt((duration / 1000) % 60),
-            minutes = parseInt((duration / (1000 * 60)) % 60),
-            hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+        "use strict";
 
-          hours = (hours < 10) ? "0" + hours : hours;
-          minutes = (minutes < 10) ? "0" + minutes : minutes;
-          seconds = (seconds < 10) ? "0" + seconds : seconds;
+        function msToTime(duration) {
+          var milliseconds = parseInt(duration % 1000 / 100),
+              seconds = parseInt(duration / 1000 % 60),
+              minutes = parseInt(duration / (1000 * 60) % 60),
+              hours = parseInt(duration / (1000 * 60 * 60) % 24);
+
+          hours = hours < 10 ? "0" + hours : hours;
+          minutes = minutes < 10 ? "0" + minutes : minutes;
+          seconds = seconds < 10 ? "0" + seconds : seconds;
 
           return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
         }
 
-        var fin = new Date(2019,0,26)
+        var fin = new Date(2019, 0, 26);
+        var text = 'FUERA DE MI PUTA CASA!!!';
+        var size = 8;
+        var i = 0;
 
-        var interval = setInterval(function() {
-          var diff = fin - new Date()
+        setInterval(function () {
+          var diff = fin - new Date();
           if (diff < 0) {
-            document.getElementsByTagName('body')[0].innerText = 'FUERA DE MI PUTA CASA!!!'
-            clearInterval(interval)
+            var textVisible = '';
+            var k = i;
+            for (var j = 0; j < size; j++) {
+              textVisible = textVisible + text[k];
+              k = (k + 1) % text.length;
+            }
+            i = (i + 1) % text.length;
+            document.getElementsByTagName('body')[0].innerText = textVisible;
           } else {
-            var time = msToTime(fin - new Date())
-            document.getElementsByTagName('body')[0].innerText = time
+            var time = msToTime(fin - new Date());
+            document.getElementsByTagName('body')[0].innerText = time;
           }
-        }, 100)
-
+        }, 200);
     </script>
 
 </head>
