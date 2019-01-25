@@ -29,9 +29,15 @@
 
         var fin = new Date(2019,0,26)
 
-        setInterval(function() {
+        var interval = setInterval(function() {
+          var diff = fin - new Date()
+          if (diff < 0) {
+            document.getElementsByTagName('body')[0].innerText = 'FUERA DE MI PUTA CASA!!!'
+            clearInterval(interval)
+          } else {
             var time = msToTime(fin - new Date())
             document.getElementsByTagName('body')[0].innerText = time
+          }
         }, 100)
 
     </script>
