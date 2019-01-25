@@ -14,27 +14,21 @@
     </style>
 
     <script>
-
         "use strict";
-
         function msToTime(duration) {
           var milliseconds = parseInt(duration % 1000 / 100),
               seconds = parseInt(duration / 1000 % 60),
               minutes = parseInt(duration / (1000 * 60) % 60),
               hours = parseInt(duration / (1000 * 60 * 60) % 24);
-
           hours = hours < 10 ? "0" + hours : hours;
           minutes = minutes < 10 ? "0" + minutes : minutes;
           seconds = seconds < 10 ? "0" + seconds : seconds;
-
           return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
         }
-
         var fin = new Date(2019, 0, 26);
         var text = 'FUERA DE MI PUTA CASA!!!';
         var size = 8;
         var i = 0;
-
         setInterval(function () {
           var diff = fin - new Date();
           if (diff < 0) {
@@ -45,16 +39,26 @@
               k = (k + 1) % text.length;
             }
             i = (i + 1) % text.length;
-            document.getElementsByTagName('body')[0].innerText = textVisible;
+            document.getElementsByTagName('span')[0].innerText = textVisible;
           } else {
             var time = msToTime(fin - new Date());
-            document.getElementsByTagName('body')[0].innerText = time;
+            document.getElementsByTagName('span')[0].innerText = time;
           }
         }, 200);
+		Date.prototype.addHours = function(h) {    
+		   this.setTime(this.getTime() + (h*60*60*1000)); 
+		   return this;   
+		}	
+		
+		var myFunction = function(){
+			fin.addHours(1);
+		}
+		
     </script>
 
 </head>
 <body>
-00:00:00
+<button onclick="fin.addHours(1);">A bit more :)</button>
+<span>00:00:00</span>
 </body>
 </html>
